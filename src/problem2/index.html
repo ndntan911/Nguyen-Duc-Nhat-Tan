@@ -1,26 +1,81 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fancy Form</title>
-
-  <!-- You may add more stuff here -->
+  <title>Premium Currency Swap</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
+  <div class="app-container">
+    <div class="glass-panel swap-form-container">
+      <h2 class="form-title">Swap</h2>
 
-  <!-- You may reorganise the whole HTML, as long as your form achieves the same effect. -->
-  <form onsubmit="return !1">
-    <h5>Swap</h5>
-    <label for="input-amount">Amount to send</label>
-    <input id="input-amount" />
+      <form id="swap-form" novalidate>
+        <!-- From Section -->
+        <div class="input-group">
+          <label for="input-amount">You pay</label>
+          <div class="input-row">
+            <input type="number" id="input-amount" placeholder="0.00" step="any" min="0" autocomplete="off" />
+            <div class="token-selector" id="from-token-selector">
+              <img src="" alt="" class="token-icon" id="from-token-icon" style="display: none;">
+              <select id="from-token" required>
+                <option value="" disabled selected>Select</option>
+              </select>
+            </div>
+          </div>
+          <div class="error-message" id="input-error">Required</div>
+        </div>
 
-    <label for="output-amount">Amount to receive</label>
-    <input id="output-amount" />
+        <!-- Swap Icon -->
+        <div class="swap-icon-container">
+          <button type="button" class="swap-button" id="swap-tokens-btn" aria-label="Swap tokens">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 4V20M12 20L8 16M12 20L16 16M12 4L8 8M12 4L16 8" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
 
-    <button>CONFIRM SWAP</button>
-  </form>
+        <!-- To Section -->
+        <div class="input-group">
+          <label for="output-amount">You receive</label>
+          <div class="input-row">
+            <input type="text" id="output-amount" placeholder="0.00" readonly />
+            <div class="token-selector" id="to-token-selector">
+              <img src="" alt="" class="token-icon" id="to-token-icon" style="display: none;">
+              <select id="to-token" required>
+                <option value="" disabled selected>Select</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="exchange-rate-details" id="exchange-rate-details">
+          <!-- Populated by JS -->
+        </div>
+
+        <button type="submit" class="submit-button" id="submit-btn" disabled>
+          <span class="btn-text">Connect Wallet</span>
+          <div class="loader" id="submit-loader"></div>
+        </button>
+      </form>
+
+      <!-- Success Modal / Overlay -->
+      <div id="success-overlay" class="overlay hidden">
+        <div class="success-card">
+          <div class="success-icon">✓</div>
+          <h3>Swap Successful</h3>
+          <p id="success-message">Successfully swapped tokens.</p>
+          <button type="button" class="close-modal" id="close-success">Done</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
   <script src="script.js"></script>
 </body>
 
